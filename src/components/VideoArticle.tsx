@@ -1,11 +1,7 @@
 import Image from 'next/image'
+import { Byline } from './Byline'
+import { dateFormatter, parseYoutubeId } from '@/lib/utils'
 import type { Video } from '@/lib/types'
-
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
-})
 
 export function VideoArticle({
   video,
@@ -14,16 +10,13 @@ export function VideoArticle({
   video: Video
   priority: boolean
 }) {
-  const searchParams = new URLSearchParams(
-    video.video_url.split('?').pop()
-  )
-  const ytVideoId = searchParams.get('v')
-
   return (
     <article key={video.id} className="flex flex-col gap-1">
       <Image
         className="aspect-video"
-        src={`https://i.ytimg.com/vi_webp/${ytVideoId}/sddefault.webp`}
+        src={`https://i.ytimg.com/vi_webp/${parseYoutubeId(
+          video.video_url
+        )}/sddefault.webp`}
         alt={video.title}
         width={640}
         height={480}
@@ -34,15 +27,13 @@ export function VideoArticle({
       <div className="ml-3">
         <h3 className="font-medium">{video.title}</h3>
 
-        <div className="flex gap-x-1 text-sm text-gray-500">
-          <span>{video.user_id}</span>
-          <span>•</span>
-          <span>{video.num_comments} comments</span>
-          <span>•</span>
-          <span>
-            {dateFormatter.format(new Date(video.created_at))}
-          </span>
-        </div>
+        <Byline
+          items={[
+            `@${video.user_id}`,
+            `${video.num_comments} comments`,
+            dateFormatter.format(new Date(video.created_at)),
+          ]}
+        />
       </div>
     </article>
   )
