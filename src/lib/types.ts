@@ -9,3 +9,13 @@ export type Video = {
 }
 
 export type Videos = Video[]
+
+export type Comment = {
+  created_at: string
+  content: string
+  user_id: string
+  video_id: string
+  id: string
+}
+
+export type Comments = Comment[]
