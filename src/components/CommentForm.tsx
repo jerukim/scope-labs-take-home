@@ -26,7 +26,7 @@ export function CommentForm({ videoId }: { videoId: string }) {
         />
 
         <SubmitButton
-          className="bg-blue-400 rounded-lg px-3 text-white"
+          className="bg-blue-400 hover:bg-blue-500 rounded-lg px-3 text-white"
           idleLable="Comment"
           pendingLable="Commenting..."
         />
