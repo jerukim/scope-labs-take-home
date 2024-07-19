@@ -2,12 +2,12 @@
 
 import { useFormState } from 'react-dom'
 import { addComment } from '@/lib/actions'
-import { EMPTY_FORM_STATE } from '@/lib/form'
 import { SubmitButton } from './SubmitButton'
+import { USER_ID, EMPTY_FORM_STATE } from '@/lib/constants'
 
 export function CommentForm({ videoId }: { videoId: string }) {
   const [formState, dispatch] = useFormState(
-    addComment.bind(null, { videoId, userId: 'john_smith' }),
+    addComment.bind(null, { videoId, userId: USER_ID }),
     EMPTY_FORM_STATE
   )
 
@@ -26,7 +26,7 @@ export function CommentForm({ videoId }: { videoId: string }) {
         />
 
         <SubmitButton
-          className="bg-blue-400 rounded-lg px-3 text-white"
+          className="bg-blue-400 hover:bg-blue-500 rounded-lg px-3 text-white"
           idleLable="Comment"
           pendingLable="Commenting..."
         />
