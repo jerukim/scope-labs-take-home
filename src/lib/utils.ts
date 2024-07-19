@@ -6,7 +6,7 @@ export function parseYoutubeId(youtubeUrl: string) {
   const searchParams = new URLSearchParams(
     youtubeUrl.split('?').pop()
   )
-  return searchParams.get('v')
+  return searchParams.get('v') ?? searchParams.get('si')
 }
 
 export const dateFormatter = new Intl.DateTimeFormat('en-US', {

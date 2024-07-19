@@ -1,9 +1,9 @@
 'use server'
 
-import * as z from 'zod'
 import { revalidateTag } from 'next/cache'
+import { postComment, postVideo } from './api'
 import { fromErrorToFormState, toFormState } from './form'
-import { postComment } from './api'
+import { CommentSchema, VideoSchema } from './schema'
 import { TAG } from './constants'
 
 import type { FormState } from './types'
@@ -14,14 +14,9 @@ export async function addComment(
   formData: FormData
 ) {
   try {
-    const { comment } = z
-      .object({
-        comment: z
-          .string()
-          .min(1, 'Comment must be at least 1 character')
-          .max(500, 'Comment must be less than 500 characters'),
-      })
-      .parse({ comment: formData.get('comment') })
+    const { comment } = CommentSchema.parse({
+      comment: formData.get('comment'),
+    })
 
     await postComment({
       video_id: videoId,
@@ -30,6 +25,28 @@ export async function addComment(
     })
 
     revalidateTag(TAG.comment)
+
+    return toFormState('success', '')
+  } catch (error) {
+    return fromErrorToFormState(error)
+  }
+}
+
+export async function uploadVideo(
+  formState: FormState,
+  formData: FormData
+) {
+  try {
+    const body = VideoSchema.parse({
+      user_id: formData.get('user_id'),
+      description: formData.get('description'),
+      video_url: formData.get('video_url'),
+      title: formData.get('title'),
+    })
+
+    await postVideo(body)
+
+    revalidateTag(TAG.video)
 
     return toFormState('success', '')
   } catch (error) {

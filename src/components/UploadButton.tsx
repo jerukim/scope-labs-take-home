@@ -3,11 +3,28 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { Cross2Icon, UploadIcon } from '@radix-ui/react-icons'
 import { SubmitButton } from './SubmitButton'
-import { USER_ID } from '@/lib/constants'
+import { EMPTY_FORM_STATE, USER_ID } from '@/lib/constants'
+import { useEffect, useState } from 'react'
+import { useFormState } from 'react-dom'
+import { uploadVideo } from '@/lib/actions'
 
 export function UploadButton() {
+  const [formState, dispatch] = useFormState(
+    uploadVideo,
+    EMPTY_FORM_STATE
+  )
+  const [open, setOpen] = useState(false)
+
+  function toggleOpen() {
+    setOpen((open) => !open)
+  }
+
+  useEffect(() => {
+    if (formState.status === 'success') toggleOpen()
+  }, [formState.status, formState.timestamp])
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={toggleOpen}>
       <Dialog.Trigger className="flex items-center gap-1">
         <UploadIcon />
         <span>Upload</span>
@@ -19,7 +36,7 @@ export function UploadButton() {
             Upload Video
           </Dialog.Title>
 
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" action={dispatch}>
             <fieldset className="flex flex-col gap-1">
               <label className="" htmlFor="user_id">
                 User
@@ -32,6 +49,11 @@ export function UploadButton() {
                 type="text"
                 required
               />
+              {formState.fieldErrors['user_id'] && (
+                <span className="text-red-500 text-sm text-center">
+                  {formState.fieldErrors['user_id']?.[0]}
+                </span>
+              )}
             </fieldset>
             <fieldset className="flex flex-col gap-1">
               <label className="" htmlFor="title">
@@ -45,6 +67,11 @@ export function UploadButton() {
                 type="text"
                 required
               />
+              {formState.fieldErrors['title'] && (
+                <span className="text-red-500 text-sm text-center">
+                  {formState.fieldErrors['title']?.[0]}
+                </span>
+              )}
             </fieldset>
             <fieldset className="flex flex-col gap-1">
               <label className="" htmlFor="video_url">
@@ -55,9 +82,14 @@ export function UploadButton() {
                 id="video_url"
                 name="video_url"
                 placeholder="youtube.com"
-                type="text"
+                type="url"
                 required
               />
+              {formState.fieldErrors['video_url'] && (
+                <span className="text-red-500 text-sm text-center">
+                  {formState.fieldErrors['video_url']?.[0]}
+                </span>
+              )}
             </fieldset>
             <fieldset className="flex flex-col gap-1">
               <label className="" htmlFor="description">
@@ -70,7 +102,19 @@ export function UploadButton() {
                 placeholder="How to find integral..."
                 required
               />
+              {formState.fieldErrors['description'] && (
+                <span className="text-red-500 text-sm text-center">
+                  {formState.fieldErrors['description']?.[0]}
+                </span>
+              )}
             </fieldset>
+
+            {formState.status === 'error' && (
+              <span className="text-red-500 text-sm text-center">
+                {formState.message}
+              </span>
+            )}
+
             <div className="flex justify-end">
               <SubmitButton
                 className="bg-blue-400 text-white hover:bg-blue-500 focus:shadow-blue-700 inline-flex h-9 items-center justify-center rounded-lg px-4 font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
