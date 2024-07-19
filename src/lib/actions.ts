@@ -7,6 +7,8 @@ import { CommentSchema, VideoSchema } from './schema'
 import { TAG } from './constants'
 
 import type { FormState } from './types'
+import { uploadFile } from './s3'
+import { uuidv4 } from './utils'
 
 export async function addComment(
   { videoId, userId }: { videoId: string; userId: string },
@@ -37,14 +39,19 @@ export async function uploadVideo(
   formData: FormData
 ) {
   try {
-    const body = VideoSchema.parse({
-      user_id: formData.get('user_id'),
-      description: formData.get('description'),
-      video_url: formData.get('video_url'),
-      title: formData.get('title'),
-    })
+    const { user_id, description, videoFile, title } =
+      VideoSchema.parse({
+        user_id: formData.get('user_id'),
+        description: formData.get('description'),
+        videoFile: formData.get('videoFile'),
+        title: formData.get('title'),
+      })
 
-    await postVideo(body)
+    const fileName = `${uuidv4()}.${videoFile.type.split('/').pop()}`
+
+    const video_url = await uploadFile(fileName, videoFile)
+
+    await postVideo({ user_id, description, video_url, title })
 
     revalidateTag(TAG.video)
 

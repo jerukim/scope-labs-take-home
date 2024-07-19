@@ -1,3 +1,4 @@
+import { File } from 'buffer'
 import * as z from 'zod'
 
 export const CommentSchema = z.object({
@@ -10,6 +11,6 @@ export const CommentSchema = z.object({
 export const VideoSchema = z.object({
   user_id: z.string(),
   title: z.string(),
-  video_url: z.string(),
+  videoFile: z.instanceof(File),
   description: z.string(),
 })

@@ -38,11 +38,9 @@ export function UploadButton() {
 
           <form className="flex flex-col gap-4" action={dispatch}>
             <fieldset className="flex flex-col gap-1">
-              <label className="" htmlFor="user_id">
-                User
-              </label>
+              <label htmlFor="user_id">User</label>
               <input
-                className="focus:shadow-amber-800 h-10 w-full items-center justify-center rounded-lg px-3 leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+                className="h-10 w-full rounded-lg px-3 leading-none border border-gray-300"
                 id="user_id"
                 name="user_id"
                 defaultValue={USER_ID}
@@ -56,14 +54,13 @@ export function UploadButton() {
               )}
             </fieldset>
             <fieldset className="flex flex-col gap-1">
-              <label className="" htmlFor="title">
-                Title
-              </label>
+              <label htmlFor="title">Title</label>
               <input
-                className="focus:shadow-amber-800 h-10 w-full items-center justify-center rounded-lg px-3 leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+                className="h-10 w-full rounded-lg px-3 leading-none border border-gray-300"
                 id="title"
                 name="title"
                 placeholder="Intro to Calculus"
+                defaultValue="Top 7 Data Structures for Interviews Explained SIMPLY"
                 type="text"
                 required
               />
@@ -74,37 +71,34 @@ export function UploadButton() {
               )}
             </fieldset>
             <fieldset className="flex flex-col gap-1">
-              <label className="" htmlFor="video_url">
-                URL
-              </label>
-              <input
-                className="focus:shadow-amber-800 h-10 w-full items-center justify-center rounded-lg px-3 leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                id="video_url"
-                name="video_url"
-                placeholder="youtube.com"
-                type="url"
-                required
-              />
-              {formState.fieldErrors['video_url'] && (
-                <span className="text-red-500 text-sm text-center">
-                  {formState.fieldErrors['video_url']?.[0]}
-                </span>
-              )}
-            </fieldset>
-            <fieldset className="flex flex-col gap-1">
-              <label className="" htmlFor="description">
-                Description
-              </label>
+              <label htmlFor="description">Description</label>
               <textarea
-                className="focus:shadow-amber-800 w-full items-center justify-center rounded-lg px-3 leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] p-2 h-16"
+                className="w-full rounded-lg px-3 leading-snug border border-gray-300 p-2 h-32"
                 id="description"
                 name="description"
                 placeholder="How to find integral..."
+                defaultValue="Data structures are an essential part of software engineering, whether for interviews, classes, or projects.\n Today we'll be talking about the 7 most important data structures, and explaining them in the simplest way possible. We'll be covering explanation of the data structure, common uses, and time complexity for those familiar with it."
                 required
               />
               {formState.fieldErrors['description'] && (
                 <span className="text-red-500 text-sm text-center">
                   {formState.fieldErrors['description']?.[0]}
+                </span>
+              )}
+            </fieldset>
+            <fieldset className="flex flex-col gap-1">
+              <label htmlFor="videoFile">Video File</label>
+              <input
+                className="h-10 w-full"
+                id="videoFile"
+                name="videoFile"
+                type="file"
+                accept="video/.mp4"
+                required
+              />
+              {formState.fieldErrors['videoFile'] && (
+                <span className="text-red-500 text-sm text-center">
+                  {formState.fieldErrors['videoFile']?.[0]}
                 </span>
               )}
             </fieldset>
@@ -117,7 +111,7 @@ export function UploadButton() {
 
             <div className="flex justify-end">
               <SubmitButton
-                className="bg-blue-400 text-white hover:bg-blue-500 focus:shadow-blue-700 inline-flex h-9 items-center justify-center rounded-lg px-4 font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+                className="bg-blue-400 text-white hover:bg-blue-500 focus:shadow-blue-700 h-9 rounded-lg px-4 font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
                 idleLable="Upload"
                 pendingLable="Uploading..."
               />
@@ -126,7 +120,7 @@ export function UploadButton() {
 
           <Dialog.Close asChild>
             <button
-              className="hover:bg-amber-400 focus:shadow-amber-700 absolute top-3 right-3 inline-flex size-6 appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+              className="hover:bg-amber-400 focus:shadow-amber-700 absolute top-3 right-3 size-6 appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
               aria-label="Close"
             >
               <Cross2Icon />
