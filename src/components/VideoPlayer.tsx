@@ -7,11 +7,11 @@ export async function VideoPlayer({ videoId }: { videoId: string }) {
 
   return (
     <section className="flex flex-col gap-y-4">
-      <iframe
+      <video
         className="w-full h-auto aspect-video"
-        src={`https://www.youtube.com/embed/${parseYoutubeId(
-          video.video_url
-        )}`}
+        src={video.video_url}
+        controls
+        autoPlay
       />
 
       <div className="ml-3">
