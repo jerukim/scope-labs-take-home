@@ -1,6 +1,7 @@
 import { getVideos } from '@/lib/api'
 
 import { VideoArticle } from './VideoArticle'
+import Link from 'next/link'
 
 export async function VideoFeed() {
   const videos = await getVideos('john_smith')
@@ -8,7 +9,9 @@ export async function VideoFeed() {
   return (
     <>
       {videos.map((video, i) => (
-        <VideoArticle video={video} priority={i < 10} />
+        <Link href={`/video/${video.id}`}>
+          <VideoArticle video={video} priority={i < 10} />
+        </Link>
       ))}
     </>
   )
