@@ -18,6 +18,7 @@ export default function RootLayout({
               className="size-11"
               src={logo}
               alt="Learnwell logo"
+              priority
             />
           </Link>
 
