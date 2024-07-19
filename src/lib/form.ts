@@ -1,18 +1,5 @@
 import { ZodError } from 'zod'
-
-export type FormState = {
-  status: 'unset' | 'success' | 'error'
-  message: string
-  fieldErrors: Record<string, string[] | undefined>
-  timestamp: number
-}
-
-export const EMPTY_FORM_STATE: FormState = {
-  status: 'unset' as const,
-  message: '',
-  fieldErrors: {},
-  timestamp: Date.now(),
-}
+import { FormState } from './types'
 
 export function fromErrorToFormState(error: unknown): FormState {
   // if validation error with Zod, return first error message

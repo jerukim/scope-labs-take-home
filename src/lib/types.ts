@@ -1,3 +1,10 @@
+export type FormState = {
+  status: 'unset' | 'success' | 'error'
+  message: string
+  fieldErrors: Record<string, string[] | undefined>
+  timestamp: number
+}
+
 export type Video = {
   created_at: string
   video_url: string

@@ -1,12 +1,5 @@
+import { API_BASE_URL, TAG } from './constants'
 import type { Comments, Video, Videos } from './types'
-
-const API_BASE_URL =
-  'https://take-home-assessment-423502.uc.r.appspot.com/api'
-
-export const TAG = {
-  comment: 'comment',
-  video: 'video',
-}
 
 export async function getVideos(userId: string) {
   const searchParams = new URLSearchParams()

@@ -1,9 +1,12 @@
 'use server'
 
 import * as z from 'zod'
-import { FormState, fromErrorToFormState, toFormState } from './form'
-import { TAG, postComment } from './api'
 import { revalidateTag } from 'next/cache'
+import { fromErrorToFormState, toFormState } from './form'
+import { postComment } from './api'
+import { TAG } from './constants'
+
+import type { FormState } from './types'
 
 export async function addComment(
   { videoId, userId }: { videoId: string; userId: string },
