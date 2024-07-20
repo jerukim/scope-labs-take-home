@@ -16,7 +16,7 @@ export function CommentForm({ videoId }: { videoId: string }) {
       <div className="flex gap-2">
         <textarea
           key={formState.timestamp}
-          className="border rounded-lg border-gray-200 w-full p-2 text-sm"
+          className="border rounded-lg border-gray-300 w-full p-2 text-sm"
           id="comment"
           name="comment"
           placeholder="Add a comment..."

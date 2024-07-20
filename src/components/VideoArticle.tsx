@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Byline } from './Byline'
-import { dateFormatter, parseYoutubeId } from '@/lib/utils'
+import { dateFormatter } from '@/lib/utils'
 import type { Video } from '@/lib/types'
 
 export function VideoArticle({
@@ -14,9 +14,7 @@ export function VideoArticle({
     <article key={video.id} className="flex flex-col gap-1">
       <Image
         className="aspect-video"
-        src={`https://i.ytimg.com/vi_webp/${parseYoutubeId(
-          video.video_url
-        )}/sddefault.webp`}
+        src={video.video_url.replace('mp4', 'png')}
         alt={video.title}
         width={640}
         height={480}

@@ -10,7 +10,7 @@ export async function VideoFeed() {
   return (
     <>
       {videos.map((video, i) => (
-        <Link href={`/video/${video.id}`}>
+        <Link key={video.id} href={`/video/${video.id}`}>
           <VideoArticle video={video} priority={i < 10} />
         </Link>
       ))}
