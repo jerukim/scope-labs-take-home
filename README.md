@@ -12,6 +12,7 @@
 
 *ffmpeg is used to generate a thumbnail from the uploaded video file
 
+
 ### Build and Run Project
 Assuming you have homebrew and pnpm installed, you can simply run:
 `make up && make start`
@@ -23,6 +24,8 @@ Alternatively you can do each step manually:
 2. `pnpm install`
 3. `pnpm build`
 4. `pnpm start`
+
+
 
 ## Project Overview
 This assignment was completed using Reacts latest features: React Server Componets (RSC) and Server Actions (SA). You will find RSC's are nested inside of Suspense boundries to provide a loading skeleton and pending states. This can be tested out by either throttling network with Chrome Dev Tools Network tab or importing the `sleep` utility function in `src/lib/utils.ts` into the API controllers.
@@ -47,3 +50,10 @@ With RSC's and SA's, we no longer have to manage state on the client side that c
         2. Keeping validation dependencies on the server to reduce client bundle size
         3. Keep client data up to date with Next's revalidation tags. (`src/lib/(actions,api,constants).ts`)
     5. Comments are fetched and rendered on server
+
+
+
+## Screenshots
+![home page video feed demo](./screenshots/home.gif?raw=true "Home")
+![upload demo](./screenshots/upload.gif?raw=true "Upload")
+![video player and comment demo](./screenshots/comment.gif?raw=true "Video and Comment")
