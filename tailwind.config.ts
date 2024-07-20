@@ -9,6 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        'bluelw-50': 'rgb(90, 189, 222)',
+        'bluelw-100': 'rgb(85, 161, 192)',
         'greenlw-50': 'rgb(84, 173, 146)',
         'greenlw-100': 'rgb(67, 133, 136)',
         'greenlw-200': 'rgb(57, 85, 102)',
