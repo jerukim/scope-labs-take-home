@@ -60,7 +60,6 @@ export function UploadButton() {
                 id="title"
                 name="title"
                 placeholder="Intro to Calculus"
-                defaultValue="Top 7 Data Structures for Interviews Explained SIMPLY"
                 type="text"
                 required
               />
@@ -76,8 +75,7 @@ export function UploadButton() {
                 className="w-full rounded-lg px-3 leading-snug border border-gray-300 p-2 h-32"
                 id="description"
                 name="description"
-                placeholder="How to find integral..."
-                defaultValue="Data structures are an essential part of software engineering, whether for interviews, classes, or projects.\n Today we'll be talking about the 7 most important data structures, and explaining them in the simplest way possible. We'll be covering explanation of the data structure, common uses, and time complexity for those familiar with it."
+                placeholder="How to find integrals and more"
                 required
               />
               {formState.fieldErrors['description'] && (
