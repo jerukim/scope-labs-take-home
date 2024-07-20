@@ -44,7 +44,6 @@ With RSC's and SA's, we no longer have to manage state on the client side that c
 3. [Video Page](http://localhost:3000/video/JDDYqulUxEuvdVJ6nFeo)
     1. The video page fetches the video and comments in parallel with loading skeletons to improve user experience and load speeds.
     2. The VideoPlayer uses HTML5's video element to enable fullscreen mode and playback speed controls.
-        1. Fullscreen API could be utilized here to provide a OS level fullscreen experience instead of being bound to the browser window.
     3. The CommentForm utilizes SA's to
         1. Provide pending state with `useFormStatus` in `SubmitButton`
         2. Keeping validation dependencies on the server to reduce client bundle size
@@ -58,5 +57,7 @@ With RSC's and SA's, we no longer have to manage state on the client side that c
 ![home page video feed demo](./screenshots/home.gif?raw=true "Home")
 ### Upload
 ![upload demo](./screenshots/upload.gif?raw=true "Upload")
+### Video Controls
+![video controls demo](./screenshots/controls.gif?raw=true "Video Controls")
 ### Comment
-![video player and comment demo](./screenshots/comment.gif?raw=true "Video and Comment")
+![Comment demo](./screenshots/comment.gif?raw=true "Comment")
