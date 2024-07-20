@@ -11,7 +11,6 @@ export async function VideoPlayer({ videoId }: { videoId: string }) {
         className="w-full h-auto aspect-video"
         src={video.video_url}
         controls
-        autoPlay
       />
 
       <div className="ml-3">
