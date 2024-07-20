@@ -54,6 +54,9 @@ With RSC's and SA's, we no longer have to manage state on the client side that c
 
 
 ## Screenshots
+### Home
 ![home page video feed demo](./screenshots/home.gif?raw=true "Home")
+### Upload
 ![upload demo](./screenshots/upload.gif?raw=true "Upload")
+### Comment
 ![video player and comment demo](./screenshots/comment.gif?raw=true "Video and Comment")
