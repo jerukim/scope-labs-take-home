@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Byline } from './Byline'
-import { dateFormatter, parseYoutubeId } from '@/lib/utils'
+import { dateFormatter } from '@/lib/utils'
 import type { Video } from '@/lib/types'
 
 export function VideoArticle({

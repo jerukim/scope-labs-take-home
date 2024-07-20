@@ -1,5 +1,5 @@
 import { getVideo } from '@/lib/api'
-import { dateFormatter, parseYoutubeId } from '@/lib/utils'
+import { dateFormatter } from '@/lib/utils'
 import { Byline } from './Byline'
 
 export async function VideoPlayer({ videoId }: { videoId: string }) {
@@ -11,7 +11,10 @@ export async function VideoPlayer({ videoId }: { videoId: string }) {
         className="w-full h-auto aspect-video"
         src={video.video_url}
         controls
+        controlsList="nodownload"
+        disablePictureInPicture
       />
+      {/* Fullscreen API can be implemented to take up device screen size instead of window size */}
 
       <div className="ml-3">
         <h2 className="font-medium text-lg">{video.title}</h2>
