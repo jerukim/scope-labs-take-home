@@ -1,8 +1,6 @@
 'use server'
 
 import { revalidateTag } from 'next/cache'
-import ffmpeg from 'fluent-ffmpeg'
-import { readFile, unlink } from 'fs/promises'
 import { Readable } from 'stream'
 
 import { postComment, postVideo } from './api'
@@ -10,6 +8,7 @@ import { TAG } from './constants'
 import { fromErrorToFormState, toFormState } from './form'
 import { CommentSchema, VideoSchema } from './schema'
 import { uuidv4 } from './utils'
+import { generateThumbnail } from './thumbnail'
 import { bucket, region, s3Client } from './s3'
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 
@@ -54,65 +53,43 @@ export async function uploadVideo(
         title: formData.get('title'),
       })
 
-    const videoFileName = `${uuidv4()}.mp4`
-    const thumbnailFileName = videoFileName.replace('mp4', 'png')
+    const fileName = uuidv4()
 
-    const videoUploadStream = Readable.from(videoFile.stream())
-    const videoThumbnailStream = Readable.from(videoFile.stream())
+    const handleVideo = async () =>
+      s3Client.send(
+        new PutObjectCommand({
+          Bucket: bucket,
+          Key: `${fileName}.mp4`,
+          Body: Readable.from(videoFile.stream()),
+          ContentType: videoFile.type,
+          ContentLength: videoFile.size,
+        })
+      )
 
-    await Promise.all([
-      s3Client
-        .send(
-          new PutObjectCommand({
-            Bucket: bucket,
-            Key: videoFileName,
-            Body: videoUploadStream,
-            ContentType: videoFile.type,
-            ContentLength: videoFile.size,
-          })
-        )
-        .then(() => videoUploadStream.destroy()),
-      new Promise<void>((resolve, reject) =>
-        ffmpeg(videoThumbnailStream)
-          .on('error', (err) => {
-            console.log(`[ffmpeg] error: ${err.message}`)
-            reject(err)
-          })
-          .on('end', async () => {
-            videoThumbnailStream.destroy()
+    const handleThumbnail = async () => {
+      const thumbnail = await generateThumbnail(
+        `${fileName}.png`,
+        Readable.from(videoFile.stream())
+      )
+      await s3Client.send(
+        new PutObjectCommand({
+          Bucket: bucket,
+          Key: thumbnail.filename,
+          Body: thumbnail.buffer,
+          ContentType: 'image/png',
+          ContentLength: thumbnail.buffer.byteLength,
+        })
+      )
+      await thumbnail.cleanup()
+    }
 
-            const thumbnailFile = await readFile(
-              `./${thumbnailFileName}`
-            )
-
-            await s3Client.send(
-              new PutObjectCommand({
-                Bucket: bucket,
-                Key: thumbnailFileName,
-                Body: thumbnailFile,
-                ContentType: 'image/png',
-                ContentLength: thumbnailFile.byteLength,
-              })
-            )
-
-            await unlink(`./${thumbnailFileName}`)
-
-            resolve()
-          })
-          .screenshot({
-            timestamps: ['1:00'],
-            filename: videoFileName.replace('mp4', 'png'),
-          })
-      ),
-    ])
-
-    const video_url = `https://${bucket}.s3.${region}.amazonaws.com/${videoFileName}`
+    await Promise.all([handleVideo(), handleThumbnail()])
 
     await postVideo({
       user_id,
-      description,
-      video_url,
       title,
+      description,
+      video_url: `https://${bucket}.s3.${region}.amazonaws.com/${fileName}.mp4`,
     })
 
     revalidateTag(TAG.videos)
