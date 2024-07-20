@@ -118,7 +118,7 @@ export function UploadButton() {
 
           <Dialog.Close asChild>
             <button
-              className="hover:bg-amber-400 focus:shadow-amber-700 absolute top-3 right-3 size-6 appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+              className="hover:bg-amber-400 focus:shadow-amber-700 absolute top-3 right-3 size-6 appearance-none flex items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
               aria-label="Close"
             >
               <Cross2Icon />
