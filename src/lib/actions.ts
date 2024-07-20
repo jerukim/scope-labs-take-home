@@ -31,6 +31,7 @@ export async function addComment(
     })
 
     revalidateTag(TAG.comments)
+    revalidateTag(TAG.video)
     revalidateTag(TAG.videos)
 
     return toFormState('success', '')

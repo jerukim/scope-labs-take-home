@@ -7,6 +7,7 @@ export const API_BASE_URL =
 
 export const TAG = {
   comments: 'comments',
+  video: 'video',
   videos: 'videos',
 }
 

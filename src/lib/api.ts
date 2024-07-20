@@ -34,6 +34,7 @@ export async function getVideo(videoId: string) {
       headers: {
         Accept: 'application/json',
       },
+      next: { tags: [TAG.video] },
     }
   )
 
