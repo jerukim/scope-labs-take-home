@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { VideoArticleSkeleton } from '@/components/VideoArticle'
 import { VideoFeed } from '@/components/VideoFeed'
+import { range } from '@/lib/utils'
 
 export default async function Home() {
   return (
@@ -9,13 +10,9 @@ export default async function Home() {
       role="feed"
     >
       <Suspense
-        fallback={
-          <>
-            {[1, 2, 3, 4, 5, 6].map((n) => (
-              <VideoArticleSkeleton key={n} />
-            ))}
-          </>
-        }
+        fallback={range(9).map((n) => (
+          <VideoArticleSkeleton key={n} />
+        ))}
       >
         <VideoFeed />
       </Suspense>

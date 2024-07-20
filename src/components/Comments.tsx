@@ -1,5 +1,5 @@
 import { getVideo, getComments } from '@/lib/api'
-import { dateFormatter } from '@/lib/utils'
+import { dateFormatter, range } from '@/lib/utils'
 
 export async function Comments({ videoId }: { videoId: string }) {
   const [video, comments] = await Promise.all([
@@ -42,7 +42,7 @@ export async function CommentsSkeleton() {
       </div>
 
       <ul className="flex flex-col gap-y-3">
-        {[1, 2, 3].map((n) => (
+        {range(6).map((n) => (
           <li key={n} className="flex flex-col gap-y-1">
             <div className="flex justify-between">
               <span className="bg-gray-200 animate-pulse h-5 w-24" />
