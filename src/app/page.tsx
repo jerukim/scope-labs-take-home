@@ -11,12 +11,9 @@ export default async function Home() {
       <Suspense
         fallback={
           <>
-            <VideoArticleSkeleton />
-            <VideoArticleSkeleton />
-            <VideoArticleSkeleton />
-            <VideoArticleSkeleton />
-            <VideoArticleSkeleton />
-            <VideoArticleSkeleton />
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <VideoArticleSkeleton key={n} />
+            ))}
           </>
         }
       >
