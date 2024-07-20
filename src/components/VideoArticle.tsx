@@ -11,9 +11,12 @@ export function VideoArticle({
   priority: boolean
 }) {
   return (
-    <article key={video.id} className="flex flex-col gap-1">
+    <article
+      key={video.id}
+      className="flex flex-col gap-1 group hover:scale-105 transition-all"
+    >
       <Image
-        className="aspect-video"
+        className="aspect-video md:rounded-md group-hover:rounded-none transition-all"
         src={video.video_url.replace('mp4', 'png')}
         alt={video.title}
         width={640}
@@ -23,7 +26,7 @@ export function VideoArticle({
       />
 
       <div className="ml-3">
-        <h3 className="font-medium">{video.title}</h3>
+        <h3 className="font-medium line-clamp-2">{video.title}</h3>
 
         <Byline
           items={[
