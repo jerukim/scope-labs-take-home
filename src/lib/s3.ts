@@ -13,10 +13,10 @@ if (!process.env.AWS_BUCKET_REGION)
 if (!process.env.AWS_BUCKET_NAME)
   throw new Error('`AWS_BUCKET_NAME` is a required env variable')
 
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
-const region = process.env.AWS_BUCKET_REGION
-const bucket = process.env.AWS_BUCKET_NAME
+export const accessKeyId = process.env.AWS_ACCESS_KEY_ID
+export const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+export const region = process.env.AWS_BUCKET_REGION
+export const bucket = process.env.AWS_BUCKET_NAME
 
 export const s3Client = new S3Client({
   credentials: {
@@ -25,19 +25,3 @@ export const s3Client = new S3Client({
   },
   region,
 })
-
-export async function uploadFile(fileName: string, file: File) {
-  const fileStream = Readable.from(file.stream())
-
-  const command = new PutObjectCommand({
-    Bucket: bucket,
-    Key: fileName,
-    Body: fileStream,
-    ContentType: file.type,
-    ContentLength: file.size,
-  })
-
-  await s3Client.send(command)
-
-  return `https://${bucket}.s3.${region}.amazonaws.com/${fileName}`
-}
