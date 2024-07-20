@@ -12,7 +12,7 @@ export function CommentForm({ videoId }: { videoId: string }) {
   )
 
   return (
-    <form className="px-3 flex flex-col gap-2" action={dispatch}>
+    <form className="flex flex-col gap-2" action={dispatch}>
       <div className="flex gap-2">
         <textarea
           key={formState.timestamp}
@@ -26,9 +26,9 @@ export function CommentForm({ videoId }: { videoId: string }) {
         />
 
         <SubmitButton
-          className="bg-blue-400 hover:bg-blue-500 rounded-lg px-3 text-white"
-          idleLable="Comment"
-          pendingLable="Commenting..."
+          className="bg-greenlw-50 hover:bg-greenlw-100 focus:shadow-greenlw-200 focus:shadow-[0_0_0_2px] rounded-lg text-white w-24"
+          idleLable="Post"
+          pendingLable="Posting..."
         />
       </div>
 

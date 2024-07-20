@@ -25,7 +25,7 @@ export function UploadButton() {
 
   return (
     <Dialog.Root open={open} onOpenChange={toggleOpen}>
-      <Dialog.Trigger className="flex items-center gap-1">
+      <Dialog.Trigger className="flex items-center gap-2 text-white bg-bluelw-50 hover:bg-bluelw-100 h-12 px-4 rounded-lg">
         <UploadIcon />
         <span>Upload</span>
       </Dialog.Trigger>
@@ -109,7 +109,7 @@ export function UploadButton() {
 
             <div className="flex justify-end">
               <SubmitButton
-                className="bg-blue-400 text-white hover:bg-blue-500 focus:shadow-blue-700 h-9 rounded-lg px-4 font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+                className="bg-greenlw-50 hover:bg-greenlw-100 focus:shadow-greenlw-200 text-white h-9 rounded-lg px-4 font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
                 idleLable="Upload"
                 pendingLable="Uploading..."
               />
@@ -118,7 +118,7 @@ export function UploadButton() {
 
           <Dialog.Close asChild>
             <button
-              className="hover:bg-amber-400 focus:shadow-amber-700 absolute top-3 right-3 size-6 appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+              className="hover:bg-amber-400 focus:shadow-amber-700 absolute top-3 right-3 size-6 appearance-none flex items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
               aria-label="Close"
             >
               <Cross2Icon />

@@ -1,5 +1,6 @@
 import { getVideo, getComments } from '@/lib/api'
-import { dateFormatter } from '@/lib/utils'
+import { dateFormatter, range } from '@/lib/utils'
+import { Byline } from './Byline'
 
 export async function Comments({ videoId }: { videoId: string }) {
   const [video, comments] = await Promise.all([
@@ -8,23 +9,20 @@ export async function Comments({ videoId }: { videoId: string }) {
   ])
 
   return (
-    <section className="flex flex-col gap-y-2 px-3">
-      <div className="flex gap-3 items-center">
-        <h2 className="leading-none text-lg font-bold">Comments</h2>
-        <span className="leading-none text-sm text-gray-500">
-          {video.num_comments}
-        </span>
-      </div>
+    <section className="flex flex-col gap-y-4">
+      <h2 className="leading-none text-lg font-bold">
+        {video.num_comments} Comments
+      </h2>
 
-      <ul className="flex flex-col gap-y-3">
+      <ul className="flex flex-col gap-y-5">
         {comments.map((comment) => (
           <li key={comment.id} className="flex flex-col gap-y-1">
-            <div className="flex justify-between text-gray-500 text-sm">
-              <span>@{comment.user_id}</span>
-              <span>
-                {dateFormatter.format(new Date(comment.created_at))}
-              </span>
-            </div>
+            <Byline
+              items={[
+                comment.user_id,
+                dateFormatter.format(new Date(comment.created_at)),
+              ]}
+            />
             <p className="text-sm">{comment.content}</p>
           </li>
         ))}
@@ -35,16 +33,13 @@ export async function Comments({ videoId }: { videoId: string }) {
 
 export async function CommentsSkeleton() {
   return (
-    <section className="flex flex-col gap-y-2 px-3">
-      <div className="flex gap-3 items-center">
-        <h2 className="leading-none text-lg font-bold">Comments</h2>
-        <div className="h-[14px] text-gray-500" />
-      </div>
+    <section className="flex flex-col gap-y-4">
+      <h2 className="leading-none text-lg font-bold">Comments</h2>
 
-      <ul className="flex flex-col gap-y-3">
-        {[1, 2, 3].map((n) => (
+      <ul className="flex flex-col gap-y-5">
+        {range(6).map((n) => (
           <li key={n} className="flex flex-col gap-y-1">
-            <div className="flex justify-between">
+            <div className="flex gap-2">
               <span className="bg-gray-200 animate-pulse h-5 w-24" />
               <span className="bg-gray-200 animate-pulse h-5 w-20" />
             </div>

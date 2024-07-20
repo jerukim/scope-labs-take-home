@@ -12,16 +12,18 @@ export default async function VideoPage({
   params: { id: string }
 }) {
   return (
-    <main className="w-full flex flex-col gap-5 pb-7">
+    <section className="w-full flex flex-col gap-5 pb-7">
       <Suspense fallback={<VideoPlayerSkeleton />}>
         <VideoPlayer videoId={params.id} />
       </Suspense>
 
-      <CommentForm videoId={params.id} />
+      <section className="flex flex-col self-center w-full max-w-screen-xl gap-4 px-3">
+        <CommentForm videoId={params.id} />
 
-      <Suspense fallback={<CommentsSkeleton />}>
-        <Comments videoId={params.id} />
-      </Suspense>
-    </main>
+        <Suspense fallback={<CommentsSkeleton />}>
+          <Comments videoId={params.id} />
+        </Suspense>
+      </section>
+    </section>
   )
 }

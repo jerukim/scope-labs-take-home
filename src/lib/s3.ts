@@ -1,6 +1,4 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
-import { Readable } from 'stream'
-import { File } from 'buffer'
+import { S3Client } from '@aws-sdk/client-s3'
 
 if (!process.env.AWS_ACCESS_KEY_ID)
   throw new Error('`AWS_ACCESS_KEY_ID` is a required env variable')
