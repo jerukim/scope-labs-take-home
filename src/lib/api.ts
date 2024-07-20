@@ -10,7 +10,7 @@ export async function getVideos(userId: string) {
     headers: {
       Accept: 'application/json',
     },
-    next: { tags: [TAG.video] },
+    next: { tags: [TAG.videos] },
   })
 
   if (!res.ok)
@@ -83,7 +83,7 @@ export async function getComments(videoId: string) {
       headers: {
         Accept: 'application/json',
       },
-      next: { tags: [TAG.comment] },
+      next: { tags: [TAG.comments] },
     }
   )
 

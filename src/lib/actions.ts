@@ -30,7 +30,8 @@ export async function addComment(
       user_id: userId,
     })
 
-    revalidateTag(TAG.comment)
+    revalidateTag(TAG.comments)
+    revalidateTag(TAG.videos)
 
     return toFormState('success', '')
   } catch (error) {
@@ -112,7 +113,7 @@ export async function uploadVideo(
       title,
     })
 
-    revalidateTag(TAG.video)
+    revalidateTag(TAG.videos)
 
     return toFormState('success', '')
   } catch (error) {
