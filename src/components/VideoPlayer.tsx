@@ -16,7 +16,7 @@ export async function VideoPlayer({ videoId }: { videoId: string }) {
       />
       {/* Fullscreen API can be implemented to take up device screen size instead of window size */}
 
-      <div className="ml-3">
+      <div className="px-3 self-center w-full max-w-screen-xl">
         <h2 className="font-medium text-lg">{video.title}</h2>
 
         <Byline
@@ -33,9 +33,9 @@ export async function VideoPlayer({ videoId }: { videoId: string }) {
 export function VideoPlayerSkeleton() {
   return (
     <section className="flex flex-col gap-y-4">
-      <div className="aspect-video w-full bg-black animate-pulse" />
+      <div className="w-full h-auto aspect-video bg-black animate-pulse" />
 
-      <div className="ml-3">
+      <div className="px-3 self-center w-full max-w-screen-xl">
         <div className="w-3/4 h-6 bg-gray-200 animate-pulse mb-1" />
         <div className="w-1/4 h-4 bg-gray-200 animate-pulse" />
       </div>
