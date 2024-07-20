@@ -25,7 +25,7 @@ Alternatively you can do each step manually:
 4. `pnpm start`
 
 ## Project Overview
-This assignment was completed using Reacts latest features: React Server Componets (RSC) and Server Actions (SA). You will find RSC's are nested inside of Suspense boundries to provide a loading skeletons and pending states. This can be tested out by either throttling network with Chrome Dev Tools Network tab or importing the `sleep` utility function in `src/lib/utils.ts` into the API controllers.
+This assignment was completed using Reacts latest features: React Server Componets (RSC) and Server Actions (SA). You will find RSC's are nested inside of Suspense boundries to provide a loading skeleton and pending states. This can be tested out by either throttling network with Chrome Dev Tools Network tab or importing the `sleep` utility function in `src/lib/utils.ts` into the API controllers.
 
 With RSC's and SA's, we no longer have to manage state on the client side that can be handled by the server.
 
@@ -40,7 +40,7 @@ With RSC's and SA's, we no longer have to manage state on the client side that c
     2. The VideoFeed contains VideoArticle's that link to the video's page.
 3. [Video Page](http://localhost:3000/video/JDDYqulUxEuvdVJ6nFeo)
     1. The video page fetches the video and comments in parallel with loading skeletons to improve user experience and load speeds.
-    2. The VideoPlayer uses HTML5's video element to enabled fullscreen and playback speed controls.
+    2. The VideoPlayer uses HTML5's video element to enable fullscreen mode and playback speed controls.
         1. Fullscreen API could be utilized here to provide a OS level fullscreen experience instead of being bound to the browser window.
     3. The CommentForm utilizes SA's to
         1. Provide pending state with `useFormStatus` in `SubmitButton`
