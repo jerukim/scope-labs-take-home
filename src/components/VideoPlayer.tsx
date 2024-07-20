@@ -14,7 +14,6 @@ export async function VideoPlayer({ videoId }: { videoId: string }) {
         controlsList="nodownload"
         disablePictureInPicture
       />
-      {/* Fullscreen API can be implemented to take up device screen size instead of window size */}
 
       <div className="px-3 self-center w-full max-w-screen-xl">
         <h2 className="font-medium text-lg">{video.title}</h2>
